@@ -1,0 +1,66 @@
+<div class="loading"
+    *ngIf="isLoadingResults">
+<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
+<div *ngIf="!isLoadingResults">
+  <form #employeeForm="ngForm" (ngSubmit)="submit($event)">
+      <mat-grid-list cols="2" rowHeight="2:1">
+          <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput [(ngModel)]="employee.firstName"
+                  type="text" name="firstName">
+              </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput [(ngModel)]="employee.lastName"
+                type="text" name="lastName" required>
+              </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                <mat-label>Date of Birth(DOB)</mat-label>
+                <input matInput [(ngModel)]="employee.dob"
+                type="date" name="dob" required>
+              </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                  <mat-label>Department</mat-label>
+                  <input matInput [(ngModel)]="employee.department"
+                  type="text" name="department">
+                </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                  <mat-label>Basic Salary</mat-label>
+                  <input matInput [(ngModel)]="employee.basicSalary"
+                  type="number" min="0" name="basicSalary" required>
+                </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                  <mat-label>Designation</mat-label>
+                  <input matInput [(ngModel)]="employee.designation"
+                  type="text" name="designation">
+                </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="2">
+              <mat-form-field appearance="outline">
+                  <mat-label>Bonus Plan</mat-label>
+                  <mat-select matInput name="bonusPlan" [(value)]="employee.bonusPlan" required>
+                    <mat-option *ngFor="let plan of plans" [value]="plan._id">
+                      {{ plan.name + ' - ' + plan.value }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <button mat-raised-button color="accent" class="bonus-button"
+                  type="button" (click)="openBonusPlanDialog()">New Plan</button>
+          </mat-grid-tile>
+      </mat-grid-list>
+    <button mat-raised-button color="primary" class="add-button"
+    type="submit" [disabled]="!employeeForm.form.valid">Add</button>
+  </form>
+</div>
