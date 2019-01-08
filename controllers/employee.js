@@ -14,8 +14,9 @@ module.exports = {
 
 function list(req, res) {
     const numberOfRecords = parseInt(req.query.size) || config.pageSize;
-    const page = parseInt(req.query.p) || 1;
-    const offset = (page - 1) * numberOfRecords;
+    const page = parseInt(req.query.p) || 0;
+    // as we are recieving pageIndex instead of PageNum
+    // const offset = (page - 1) * numberOfRecords;
     let search = req.query.q;
     
     let conditions = { 'isDeleted': false };
@@ -42,14 +43,14 @@ function list(req, res) {
     }
     Employee.find(conditions)
         // .sort(sortOptions)
-        .skip(offset)
+        .skip(page * numberOfRecords)
         .limit(numberOfRecords)
         .populate('bonusPlan')
         .exec(function (err, result) {
             if (err) {
                 util.errorResponse(res, err, 'listEmployee');
             } else {
-                Employee.count(conditions, function (err, count) {
+                Employee.countDocuments(conditions, function (err, count) {
                     if (err) {
                         util.errorResponse(res, err, 'listEmployeeCount');
                     } else {

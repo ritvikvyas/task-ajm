@@ -5,6 +5,6 @@ module.exports = {
         employee : 'employee',
         bonusPlan : 'bonusplan'
     },
-    'pageSize': 10
+    'pageSize': 3
 };
   

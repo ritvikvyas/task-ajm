@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-mongoose.connect(config.mongoURI, { useCreateIndex: true })
+mongoose.connect(config.mongoURI, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
