@@ -35,7 +35,8 @@ function list(req, res) {
                 { 'isDeleted': false, },
                 { '$or': [
                         { 'firstName': { '$regex': search } },
-                        { 'lastName': { '$regex': search } }
+                        { 'lastName': { '$regex': search } },
+                        { 'bonusPlan.name': { '$regex': search } }
                     ]
                 }
             ]
@@ -45,7 +46,7 @@ function list(req, res) {
         // .sort(sortOptions)
         .skip(page * numberOfRecords)
         .limit(numberOfRecords)
-        .populate('bonusPlan')
+        // .populate('bonusPlan')
         .exec(function (err, result) {
             if (err) {
                 util.errorResponse(res, err, 'listEmployee');

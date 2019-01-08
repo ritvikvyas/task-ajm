@@ -55,7 +55,7 @@ export class CreateEmployeeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.plans.push(result);
-        this.employee.bonusPlan = result._id;
+        this.employee.bonusPlan = result;
         this.cdRef.detectChanges();
       }
     });

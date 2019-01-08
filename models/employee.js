@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const config = require('../config');
 
+const BonusPlan = require('./bonus_plan');
+
 const Employee = mongoose.model(config.models.employee,
     new Schema({
         firstName: {
@@ -24,8 +26,7 @@ const Employee = mongoose.model(config.models.employee,
         },
         designation: String,
         bonusPlan: {
-            type: Schema.Types.ObjectId,
-            ref: config.models.bonusPlan,
+            type: BonusPlan.schema,
             required: true
         },
         isDeleted: {
