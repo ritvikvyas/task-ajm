@@ -50,7 +50,8 @@
           <mat-grid-tile colspan="2">
               <mat-form-field appearance="outline">
                   <mat-label>Bonus Plan</mat-label>
-                  <mat-select matInput name="bonusPlan" [(value)]="employee.bonusPlan" required>
+                  <mat-select matInput name="bonusPlan" [(ngModel)]="employee.bonusPlan" required>
+                    <mat-option>None</mat-option>
                     <mat-option *ngFor="let plan of plans" [value]="plan._id">
                       {{ plan.name + ' - ' + plan.value }}
                     </mat-option>
